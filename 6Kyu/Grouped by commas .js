@@ -25,7 +25,7 @@ groupByCommas(1000000);
 //Otherwise return insert commas function
 
 //Insert commas function, will look for a grouping of three digits.
-//Find the three digits, and place a comma in behind it of it.
+//Find the three digits, and place a comma in behind it.
 //Reverse and loop through the numbers
 //Establish count that holds value of i.
 //If count % 3 == 0
