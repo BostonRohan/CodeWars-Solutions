@@ -25,12 +25,8 @@ groupByCommas(1000000);
 //Otherwise return insert commas function
 
 //Insert commas function, will look for a grouping of three digits.
-//Find the three digits, and place a comma in front of it.
-//Loop through the numbers
+//Find the three digits, and place a comma in behind it of it.
+//Reverse and loop through the numbers
 //Establish count that holds value of i.
 //If count % 3 == 0
-//Push those numbers onto a new array, then push on the comma following it.
-//Return the new number
-
-//Helper function that determines the value of the string.
-//The function uses a range, to check where the first comma should be placed.
+//Place a comma after the last digit in the grouping of digits.
