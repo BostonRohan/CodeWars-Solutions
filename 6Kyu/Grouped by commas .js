@@ -1,19 +1,22 @@
 function groupByCommas(n) {
+  //Check to see if the the number has less than three digits, if it does return the number in string format, otherwise, send the number into the insertCommas function.
   return n.length <= 3 ? n.toString() : insertCommas(n);
 }
 
-function insertCommas(arr) {
-  var insertCommas = [];
-  for (var i = arr.length - 1; i >= 0; i--) {
-    if (arr[i].length === 3) {
-      insertCommas.push(arr[i], ",");
-    } else {
-      insertCommas.push(arr[i]);
+function insertCommas(n) {
+  //Turn the string into a reversed array.
+  n = n.toString().split("").reverse();
+  //Iterate over the array.
+  for (var i = 0; i < n.length; i++) {
+    //If it is a collection of three numbers disregarding zero. Place a comma after the third number.
+    if (i % 3 === 0 && i > 0) {
+      n[i] = n[i] + ",";
     }
   }
-  return insertCommas.reverse().flat().join("");
+  //Reverse the array and join it into a string.
+  return n.reverse().join("");
 }
-console.log(groupByCommas(1, 000, 000));
+groupByCommas(1000000);
 
 //Psuedo Code
 //Main function that returns a number with commas if necessary.
@@ -28,3 +31,6 @@ console.log(groupByCommas(1, 000, 000));
 //If count % 3 == 0
 //Push those numbers onto a new array, then push on the comma following it.
 //Return the new number
+
+//Helper function that determines the value of the string.
+//The function uses a range, to check where the first comma should be placed.
