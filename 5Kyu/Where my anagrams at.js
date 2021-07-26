@@ -1,25 +1,39 @@
 function anagrams(word, words) {
-  (word = sort(word)), (words = sort(words));
+  //Establish variable
+  var ans = [];
+  //Iterate over the words array.
+  for (var i = 0; i < words.length; i++) {
+    //If any of the sorted words, equal the sorted word.
+    if (sort(words)[i] === sort(word)) {
+      //Push the unsorted version onto the answer array.
+      ans.push(words[i]);
+    }
+  }
+  return ans;
 }
-
-function sort(word, words) {
-  word = word.split("").sort().join("");
-  words = words.map((x) => x.split("").sort().join(""));
+//Helper function that sorts an input.
+function sort(input) {
+  //If the input is an array.
+  if (typeof input === "object") {
+    //Map over the array and sort it.
+    input = input.map((x) => x.split("").sort().join(""));
+    //Otherwise it is a string
+  } else {
+    //Sort the string
+    input = input.split("").sort().join("");
+  }
+  return input;
 }
-console.log(sort("abba", ["aabb", "abcd", "bbaa", "dada"]));
+anagrams("racer", ["crazer", "carer", "racar", "caers", "racer"]);
 
 //Psuedo Code
 //Input : The word as a string, as well as an array of words.
-//Helper function that sorts both inputs.
-//Makes checking anagrams a bit easier..
+
+//Helper function
+//Sorts both inputs alphabetically.
 
 //Main function
-//Iterate through array of words.
-//Iterate through the word string.
-//Check every letter in the string over each word in the array.
-//"a" [aabb] "b" [aabb] "b" [aabb] "b" [aabb]
-//If each letter is included then push it onto the answer array.
-//Continue iterating through array.
-//If there is a letter that is not included, then iterate over the entire word.
-//Otherwise continue loop.
-//Return the final array.
+//Establish variable
+//Iterate through the array
+//If the two sorted words equal
+//Push it from the original array.
