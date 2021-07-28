@@ -1,4 +1,4 @@
-function dirReduc(arr) {
+function direcReduc(arr) {
   for (var i = 0; i < arr.length; i++) {
     if (
       (arr[i] === "NORTH" && arr[i + 1] === "SOUTH") ||
@@ -11,19 +11,17 @@ function dirReduc(arr) {
     ) {
       arr.splice(i, 2);
     }
+    direcReduc(arr);
   }
   return arr;
 }
 console.log(
-  dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"])
+  direcReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"])
 );
 
 //Psuedo Code
-//Iterate over the array.
-//If opposites are beside each other, splice them from the array.
-//Each time through the array should be getting smaller and smaller in value.
-//If the array ends in duplicates remove them from the array.
-
-//Recursion problem?
-
-//If keep deleting until no two opposites are beside each other.
+//Recursive function
+//If South, North or North, South delete.
+//Or if East, West or West, East delete
+//Keep deleting from array until both conditions are not true, recursively call function
+//Return arr.
