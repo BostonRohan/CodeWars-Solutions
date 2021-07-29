@@ -1,27 +1,23 @@
-function direcReduc(arr) {
+function dirReduc(arr) {
+  //Iterate over the array.
   for (var i = 0; i < arr.length; i++) {
+    //If North, South : East, West; are in consecutive positions, delete them.
     if (
       (arr[i] === "NORTH" && arr[i + 1] === "SOUTH") ||
-      (arr[i] === "SOUTH" && arr[i + 1] === "NORTH")
+      (arr[i] === "SOUTH" && arr[i + 1] === "NORTH") ||
+      (arr[i] === "WEST" && arr[i + 1] === "EAST") ||
+      (arr[i] === "EAST" && arr[i + 1] === "WEST")
     ) {
+      //Delete the two strings.
       arr.splice(i, 2);
-    } else if (
-      (arr[i] === "EAST" && arr[i + 1] === "WEST") ||
-      (arr[i] === "WEST" && arr[i + 1] === "EAST")
-    ) {
-      arr.splice(i, 2);
+      //Move i backwards two values each time you delete from the array to recheck the arr.
+      i -= 2;
     }
-    direcReduc(arr);
+    //If the array is empty, stop looping.
+    if (arr.length < 1) {
+      break;
+    }
   }
   return arr;
 }
-console.log(
-  direcReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"])
-);
-
-//Psuedo Code
-//Recursive function
-//If South, North or North, South delete.
-//Or if East, West or West, East delete
-//Keep deleting from array until both conditions are not true, recursively call function
-//Return arr.
+dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]);
