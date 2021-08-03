@@ -1,4 +1,7 @@
 function rgb(r, g, b) {
+  return [toHex(r), toHex(g), toHex(b)].join("");
+}
+function toHex(num) {
   const conversion = {
     0: 0,
     1: 1,
@@ -17,36 +20,27 @@ function rgb(r, g, b) {
     14: "E",
     15: "F",
   };
-  (r = checkInput(r)), (g = checkInput(g)), (b = checkInput(b));
-  var hex = [
-    conversion[r],
-    conversion[g],
-    conversion[b],
-    conversion[r],
-    conversion[g],
-    conversion[b],
-  ];
-  return hex.join("");
+  if (num <= 0) {
+    ans = ["00"];
+    return ans;
+  } else {
+    num > 255 ? (num = 255) : (num = num);
+    var hex = num / 16;
+    var remainder = "0." + hex.toString().split(".")[1];
+    return [Math.floor(hex), parseFloat(remainder * 16)]
+      .map((num) => conversion[num])
+      .sort()
+      .join("");
+  }
 }
-function toHex(num) {
-  num = num / 16;
-  var decimalSplit = num.toString().split(".");
-  var remainder = "0." + decimalSplit[1];
-  var hexValue = parseFloat(remainder) * 16;
-  return hexValue;
-}
-console.log(rgb(148, 0, 211));
+console.log(rgb(105, 114, 279));
 //Psuedo Code
 //Create an object that stores the Decimal, and Hexidecimal pairs, with the key value being the Decimal, and the Hexidecimal being the value.
-//To convert, divide the first number by 16
+//Send each number through toHex function, which will return the two converted values.
+//To convert, divide the first number by 16, and round down.
+//To get second value, multiply the remainder by 16.
 
-//Create a check RGB function that will check the input
-
-//Fix logic on toHex function, certain values should be returning two different numbers. i: 148 returns (9, 4)
-//Helper function that takes in the given parameter
-//Divide the number by 16, record the remainder and digits before decimal using split.
-
-//Return the numbers from most significant to least.
+//Sort each array in place and return them joined together.
 
 //RGB to HEX reference: https://www.binaryhexconverter.com/decimal-to-hex-converter
 
