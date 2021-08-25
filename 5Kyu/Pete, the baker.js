@@ -5,7 +5,7 @@ function cakes(recipe, available) {
     availableArr = Object.entries(available).sort();
   var sortedAvailableAmount = [];
   var sortedRecipeAmount = [];
-  //If there is more items on the recipe than the available, then we are missing a ingredient.
+  //If there are more items on the recipe than the available, then we are missing a ingredient.
   if (recipeArr.length > availableArr.length) {
     return 0;
   }
@@ -23,7 +23,7 @@ function cakes(recipe, available) {
   //Return the smallest amount from the checkAmount function.
   return Math.min(...checkAmount(sortedRecipeAmount, sortedAvailableAmount));
 }
-//Function that checks to see if there is enough ingredients in available to bake cakes.
+//Function that checks to see if there are enough ingredients in available to bake cakes.
 //Function returns an array with the smallest number in the array being the maximum number of cakes that can be made.
 function checkAmount(recipeArr, availableArr) {
   //Iterate over the recipe.
