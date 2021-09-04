@@ -1,28 +1,44 @@
 const Calculator = function () {
   this.evaluate = (string) => {
-    var firstOperationEquation = [],
-      secondOperationEquation = [];
-    for (var i = 0; i < string.length; i++) {
-      if (string[i] === "/" || string[i] === "*") {
-        firstOperationEquation.push(string[i - 2], string[i], string[i + 2]);
-      } else if (string[i] === "+" || string[i] === "-") {
-        secondOperationEquation.push(string[i - 2], string[i], string[i + 2]);
+    var multiplyDivide = [],
+      addSubtract = [];
+    const formatted = string.split(" ").join("").split("");
+    for (var i = 0; i < formatted.length; i++) {
+      console.log(typeof parseInt(formatted[i]));
+      if (
+        formatted[i] === "/" &&
+        Number.isInteger(parseInt(formatted[i + 1]))
+      ) {
+        multiplyDivide.push(formatted[i + 1] + formatted[i]);
+      } else if (
+        formatted[i] === "*" &&
+        Number.isInteger(parseInt(formatted[i + 1]))
+      ) {
+        multiplyDivide.push(formatted[i + 1] + formatted[i]);
+      } else if (
+        formatted[i] === "+" &&
+        Number.isInteger(parseInt(formatted[i + 1]))
+      ) {
+        addSubtract.push(formatted[i + 1], formatted[i]);
+      } else if (
+        formatted[i] === "-" &&
+        Number.isInteger(parseInt(formatted[i + 1]))
+      ) {
+        addSubtract.push(formatted[i + 1], formatted[i]);
       }
     }
-    console.log(firstOperationEquation, secondOperationEquation);
   };
 };
 var calculate = new Calculator();
-console.log(calculate.evaluate("2 / 2 + 3 * 4 - 6"));
+console.log(calculate.evaluate("10 * 5 / 2"));
 
 //Psuedo Code
-
-//Iterate through the string
-//Look for multiplication and division signs.
+//Check that the string contains both multiplication/division and addition/subtraction
+//If not operate left to write
+//Otherwise
+//(Figure out how to account for order of operations)
 //Send it to the operate function
-//Then operate on addition and subtraction from left to right
 
 //Function operate()
 //Create a switch statement that operates given each operation sign
 //Store all of the answers in an array
-//Send all answers back to the main function
