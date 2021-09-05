@@ -1,38 +1,53 @@
 const Calculator = function () {
   this.evaluate = (string) => {
-    var multiplyDivide = [],
-      addSubtract = [];
-    const formatted = string.split(" ").join("").split("");
-    for (var i = 0; i < formatted.length; i++) {
-      console.log(typeof parseInt(formatted[i]));
-      if (
-        formatted[i] === "/" &&
-        Number.isInteger(parseInt(formatted[i + 1]))
-      ) {
-        multiplyDivide.push(formatted[i + 1] + formatted[i]);
-      } else if (
-        formatted[i] === "*" &&
-        Number.isInteger(parseInt(formatted[i + 1]))
-      ) {
-        multiplyDivide.push(formatted[i + 1] + formatted[i]);
-      } else if (
-        formatted[i] === "+" &&
-        Number.isInteger(parseInt(formatted[i + 1]))
-      ) {
-        addSubtract.push(formatted[i + 1], formatted[i]);
-      } else if (
-        formatted[i] === "-" &&
-        Number.isInteger(parseInt(formatted[i + 1]))
-      ) {
-        addSubtract.push(formatted[i + 1], formatted[i]);
+    if (/[+--]/g.test(string) && /[*\/]/g.test(string)) {
+      return "yes nigga";
+    } else {
+      return operate(string);
+    }
+    function operate(string) {
+      string = string.split(" ");
+      for (var i = 0; i < string.length; i++) {
+        console.log(string);
+        if (string[i] === "*" && string[i + 1] && string[i - 1]) {
+          string.splice(
+            i - 1,
+            3,
+            parseInt(string[i - 1]) * parseInt(string[i + 1])
+          );
+          i = 0;
+        } else if (string[i] === "/" && string[i + 1] && string[i - 1]) {
+          string.splice(
+            i - 1,
+            3,
+            parseInt(string[i - 1]) / parseInt(string[i + 1])
+          );
+          i = 0;
+        } else if (string[i] === "+" && string[i + 1] && string[i - 1]) {
+          string.splice(
+            i - 1,
+            3,
+            parseInt(string[i - 1]) + parseInt(string[i + 1])
+          );
+          i = 0;
+        } else if (string[i] === "-" && string[i + 1] && string[i - 1]) {
+          string.splice(
+            i - 1,
+            3,
+            parseInt(string[i - 1]) - parseInt(string[i + 1])
+          );
+          i = 0;
+        }
       }
+      return string.join("");
     }
   };
 };
 var calculate = new Calculator();
-console.log(calculate.evaluate("10 * 5 / 2"));
+console.log(calculate.evaluate("30 + 23 + 77"));
 
 //Psuedo Code
+//{Refactor possibly with while loop?}
 //Check that the string contains both multiplication/division and addition/subtraction
 //If not operate left to write
 //Otherwise
