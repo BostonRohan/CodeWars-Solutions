@@ -1,63 +1,53 @@
 const Calculator = function () {
   this.evaluate = (string) => {
+    //Splitting the string by each number/value.
+    let arr = string.split(" ");
+    //Checking to see if the string includes a pair of (+, /), (+, *), (-, *), (-, /)
     if (/[+--]/g.test(string) && /[*\/]/g.test(string)) {
-      var multIndex = [],
-        divIndex = [];
-      let arr = string.split(" ");
       for (var i = 0; i < arr.length; i++) {
+        //Only operating multiplication and division in order of operations.
+        //Replacing the equation, with the answer to the equation.
         if (arr[i] === "/") {
-          divIndex.push(i);
-        } else if (arr[i] === "*") {
-          multIndex.push(i);
+          arr.splice(i - 1, 3, parseFloat(arr[i - 1]) / parseFloat(arr[i + 1]));
+          i = 0;
+        }
+        if (arr[i] === "*") {
+          arr.splice(i - 1, 3, arr[i - 1] * arr[i + 1]);
+          i = 0;
         }
       }
-      return operate(string, multIndex, divIndex);
-    } else {
-      return operate(string);
+      //When done with multiplication and division, operate the addition and subtraction if necessary.
+      return operate(arr);
     }
-    function operate(string, multIndex, divIndex) {
-      //For loop to check both multIndex and divIndex, use while loop later...
-      let arr = string.split(" ");
-      let i = 0;
-      if (Math.min(...multIndex) > Math.min(...divIndex)) {
-        while (divIndex.length > 0) {
-          divIndex.splice(i, i);
-          arr.splice(arr[divIndex - 1] / arr[divIndex + 1]);
-          i++;
+    //Otherwise just operate, don't worry about order of operations.
+    else {
+      return operate(arr);
+    }
+    //Function that iterates through and replaces every equation with its subsequent answer.
+    function operate(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === "*") {
+          arr.splice(i - 1, 3, parseFloat(arr[i - 1]) * parseFloat(arr[i + 1]));
+          i = 0;
+        } else if (arr[i] === "/") {
+          arr.splice(i - 1, 3, parseFloat(arr[i - 1]) / parseFloat(arr[i + 1]));
+          i = 0;
+        } else if (arr[i] === "+") {
+          arr.splice(i - 1, 3, parseFloat(arr[i - 1]) + parseFloat(arr[i + 1]));
+          i = 0;
+        } else if (arr[i] === "-") {
+          arr.splice(i - 1, 3, parseFloat(arr[i - 1]) - parseFloat(arr[i + 1]));
+          i = 0;
         }
       }
-      //   for (var i = 0; i < arr.length; i++) {
-      //     if (arr[i] === "*" && arr[i + 1] && arr[i - 1]) {
-      //       arr.splice(i - 1, 3, parseInt(arr[i - 1]) * parseInt(arr[i + 1]));
-      //       i = 0;
-      //     } else if (arr[i] === "/" && arr[i + 1] && arr[i - 1]) {
-      //       arr.splice(i - 1, 3, parseInt(arr[i - 1]) / parseInt(arr[i + 1]));
-      //       i = 0;
-      //     } else if (arr[i] === "+" && arr[i + 1] && arr[i - 1]) {
-      //       arr.splice(i - 1, 3, parseInt(arr[i - 1]) + parseInt(arr[i + 1]));
-      //       i = 0;
-      //     } else if (arr[i] === "-" && arr[i + 1] && arr[i - 1]) {
-      //       arr.splice(i - 1, 3, parseInt(arr[i - 1]) - parseInt(arr[i + 1]));
-      //       i = 0;
-      //     }
-      //   }
-      //   return arr.join("");
+      let answer = 0;
+      //If the answer has a decimal, preserve the decimal values.
+      //Otherwise return the string as an integer.
+      arr.join("").includes(".")
+        ? (answer = parseFloat(arr.join("")))
+        : (answer = parseInt(arr.join("")));
+      return answer;
     }
   };
 };
 var calculate = new Calculator();
-console.log(calculate.evaluate("2 / 2 + 3 * 4 - 6"));
-
-//Psuedo Code
-//Two arrays with multindex and div index. Check both in a loop.
-//Check if the index of one is less than the other, if so operate on the lesser index.
-//{Refactor possibly with while loop?}
-//Check that the arr contains both multiplication/division and addition/subtraction
-//If not operate left to write
-//Otherwise
-//(Figure out how to account for order of operations)
-//Send it to the operate function
-
-//Function operate()
-//Create a switch statement that operates given each operation sign
-//Store all of the answers in an array
