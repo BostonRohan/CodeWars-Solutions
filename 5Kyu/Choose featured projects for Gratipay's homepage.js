@@ -29,16 +29,11 @@ function getFeaturedProjects(allProjects) {
     );
     featuredProjects = [...sortedPopular, ...sortedUnpopular];
   } else {
-    let x = 0,
-      y = 0;
-    while (featuredProjects.length < popular.length) {
-      featuredProjects.unshift(sortedPopular[x]);
-      x++;
-    }
-    while (featuredProjects.length < 10) {
-      featuredProjects.push(sortedUnpopular[y]);
-      y++;
-    }
+    sortedPopular = Array.from(
+      Array(7),
+      () => popular[Math.floor(Math.random() * popular.length)]
+    );
+    featuredProjects = [...sortedPopular];
   }
   return featuredProjects;
 }
@@ -66,6 +61,21 @@ console.log(
     { name: "Popular Project ", nreceiving_from: 1, receiving: 10 },
     { name: "Popular Project ", nreceiving_from: 8, receiving: 10 },
     { name: "Popular Project ", nreceiving_from: 12, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
+    { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
     { name: "Popular Project ", nreceiving_from: 4, receiving: 10 },
   ])
 );
