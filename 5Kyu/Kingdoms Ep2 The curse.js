@@ -1,6 +1,7 @@
 function translate(speech, vocabulary) {
   let speechArr = speech.replace(/[^*A-Za-z0-9\s]/g, "").split(" ");
   let phrase = [];
+  let punctuationData = savePunctuation(speech);
   speechArr.forEach(word => {
     vocabulary.forEach((vocabWord, index) => {
       if(vocabWord.length === word.length){
@@ -17,11 +18,19 @@ function translate(speech, vocabulary) {
       }
     });
   });
+  //Iterate through the object and place the appropriate punctuation at it's appropriate index.
   return phrase.join(' ');
 }
-console.log(translate("***lo w***d!", ["hello", "world"]));
-
-//Check if a word in vocaublary contains the available words in speech
-//If so push the word in vocabulary into the phrase
-//Start on the next word and repeat
-//Repeat until there are no words left in speech.
+function savePunctuation(speech){
+  let punctuation = [];
+  let index = [];
+  for(var i = 0; i < speech.length; i++){
+    if((/[^*A-Za-z0-9\s]/g.test(speech[i]))){
+      punctuation.push(speech[i]);
+      index.push(i);
+    }
+  }
+  //Merge the two arrays into an object.
+  return punctuation;
+}
+console.log(translate("***lo ..!w***d!", ["hello", "world"]));
