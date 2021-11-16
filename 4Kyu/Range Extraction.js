@@ -1,7 +1,14 @@
 function solution(list) {
+  let match = 0;
+  let arr = [];
   for (let i = 0; i < list.length; i++) {
-    if (i >= 3 && list.includes(list[i] + i)) {
-      console.log(list[i]);
+    if (list[i + 1] === list[i] + 1) {
+      match++;
+      if (match === 1) {
+        arr.push(list[i]);
+      }
+    } else {
+      match = 0;
     }
   }
 }
