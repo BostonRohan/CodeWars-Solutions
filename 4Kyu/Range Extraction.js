@@ -1,16 +1,20 @@
 function solution(list) {
-  let match = 0;
   let arr = [];
+  let match = 0;
+  let startRange,
+    nextNum,
+    endRange = "";
   for (let i = 0; i < list.length; i++) {
     if (list[i + 1] === list[i] + 1) {
       match++;
-      if (match === 1) {
-        arr.push(list[i]);
-      }
+    } else if (list[i + 1] !== list[i] + 1) {
+      endRange = list[i];
     } else {
       match = 0;
     }
+    match === 1 ? (startRange = list[i]) : (nextNum = list[i + 1]);
   }
+  return endRange;
 }
 console.log(
   solution([
