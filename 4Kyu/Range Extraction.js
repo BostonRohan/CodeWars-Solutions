@@ -3,18 +3,56 @@ function solution(list) {
   let match = 0;
   let startRange,
     nextNum,
-    endRange = "";
-  for (let i = 0; i < list.length; i++) {
+    endRange = 0;
+  let condition = false;
+  for (let i = 0; i < list.length + 1; i++) {
+    // console.log(
+    //   "start:",
+    //   startRange,
+    //   "end:",
+    //   endRange,
+    //   "match:",
+    //   match,
+    //   "iteration:",
+    //   list[i]
+    // );
     if (list[i + 1] === list[i] + 1) {
       match++;
-    } else if (list[i + 1] !== list[i] + 1) {
-      endRange = list[i];
     } else {
+      endRange = list[i];
       match = 0;
     }
-    match === 1 ? (startRange = list[i]) : (nextNum = list[i + 1]);
+    // match === 0 ? (endRange = "") : (endRange = endRange);
+    match === 1 ? (startRange = list[i]) : (startRange = startRange);
+    console.log(
+      "index:",
+      list.indexOf(startRange),
+      "delete",
+      startRange - endRange + 1,
+      "start",
+      startRange,
+      "end:",
+      endRange,
+      "match:",
+      match
+    );
+    // match === 0 && list.indexOf(startRange) > 0
+    //   ? list.splice(
+    //       list.indexOf(startRange),
+    //       startRange - endRange + 1,
+    //       `${startRange}-${endRange}`
+    //     )
+    //   : (list = list);
+    // if (match === 0) {
+    //   list.splice(
+    //     Math.abs(startRange),
+    //     startRange - endRange + 1,
+    //     `${startRange}-${endRange}`
+    //   );
+    // }
+    // match === 1 ? (startRange = list[i]) : (nextNum = list[i + 1]);
   }
-  return endRange;
+  return list;
 }
 console.log(
   solution([
