@@ -1,11 +1,12 @@
 function solution(list) {
-  let arr = [];
   let match = 0;
   let startRange,
-    nextNum,
     endRange = 0;
-  let condition = false;
+  // let replaceAmount = 0;
+  let ans = [];
   for (let i = 0; i < list.length + 1; i++) {
+    let replaceAmount = 0;
+    let conditional = list[i + 1] === list[i] + 1;
     // console.log(
     //   "start:",
     //   startRange,
@@ -16,19 +17,38 @@ function solution(list) {
     //   "iteration:",
     //   list[i]
     // );
-    if (list[i + 1] === list[i] + 1) {
+    if (conditional) {
       match++;
-    } else {
-      endRange = list[i];
+    }
+    if (match === 1) {
+      startRange = list[i];
+    }
+    if (!conditional) {
+      if (match >= 2) {
+        endRange = list[i];
+      }
+      replaceAmount = match;
       match = 0;
     }
+    replaceAmount > 0 && match === 0 && startRange < endRange
+      ? ans.push(`${startRange}-${endRange}`)
+      : ans.push(list[i]);
     // match === 0 ? (endRange = "") : (endRange = endRange);
-    match === 1 ? (startRange = list[i]) : (startRange = startRange);
+    // match === 1 ? (startRange = list[i]) : (startRange = startRange);
+    // replaceAmount > 0
+    //   ? list.splice(
+    //       list.indexOf(startRange),
+    //       replaceAmount,
+    //       `${startRange}-${endRange}`
+    //     )
+    //   : (replaceAmount = replaceAmount);
     console.log(
+      "iteration:",
+      list[i],
       "index:",
       list.indexOf(startRange),
       "delete",
-      startRange - endRange + 1,
+      replaceAmount,
       "start",
       startRange,
       "end:",
@@ -52,7 +72,7 @@ function solution(list) {
     // }
     // match === 1 ? (startRange = list[i]) : (nextNum = list[i + 1]);
   }
-  return list;
+  return ans;
 }
 console.log(
   solution([
