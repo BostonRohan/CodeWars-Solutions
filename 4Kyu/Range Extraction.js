@@ -5,8 +5,10 @@ function solution(list) {
   // let replaceAmount = 0;
   let ans = [];
   for (let i = 0; i < list.length + 1; i++) {
-    let replaceAmount = 0;
-    let conditional = list[i + 1] === list[i] + 1;
+    let replaceAmount = endRange - startRange + 1;
+    let increment = list[i + 1] === list[i] + 1;
+    let inRange = match > 0 && startRange > endRange;
+
     // console.log(
     //   "start:",
     //   startRange,
@@ -17,22 +19,23 @@ function solution(list) {
     //   "iteration:",
     //   list[i]
     // );
-    if (conditional) {
+    if (increment) {
       match++;
     }
     if (match === 1) {
       startRange = list[i];
     }
-    if (!conditional) {
+    if (!increment) {
       if (match >= 2) {
         endRange = list[i];
       }
       replaceAmount = match;
       match = 0;
     }
-    replaceAmount > 0 && match === 0 && startRange < endRange
-      ? ans.push(`${startRange}-${endRange}`)
-      : ans.push(list[i]);
+
+    //Delete characters as we iterate??
+
+    console.log(ans);
     // match === 0 ? (endRange = "") : (endRange = endRange);
     // match === 1 ? (startRange = list[i]) : (startRange = startRange);
     // replaceAmount > 0
